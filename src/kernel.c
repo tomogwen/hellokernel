@@ -11,11 +11,11 @@ void kernelMain(void) {
 		videomemptr[j+1] = 0x02; // attribute byte 0 - blank background
 		j = j+2;
 	}
-	j = 0;
 
+	j = 0;
 	// loop to write the string to video memory
 	while(string[j] != '\0') {
-		videomemptr[i] = string[i];
+		videomemptr[i] = string[j];
 		videomemptr[i+1] = 0x02; // attribute byte for green
 		++j;
 		i = i+2;

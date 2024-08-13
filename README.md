@@ -5,7 +5,7 @@ Extremely minimal kernel, following [this blog post](https://computers-art.mediu
 ## Notes
 
 - A kernel is the program that sits between hardware resources and applications. It is responsible for handling different processes, all hardware (via drivers).
-- It is loaded by a bootloader.
+- It is loaded by a bootloader, which is loaded by the bios.
 
 How is it loaded?
 - Bios looks for bootable devices by checking the first 512 byte block (sector 0) of a device, which includes the Master Boot Record (MBR). If there is a magic number (0x55 and 0xAA) at the end of the sector, it is an MBR.
@@ -33,12 +33,10 @@ Linking:
 
 Building:
 ```
-nasm -f elf32 kernel.asm -o kernasm.o
-gcc -m32 -c kernel.c kernc.o
-ld -m elf_i386 -T link.ld -o boot/kernel-001 kernasm.o kernc.o
+make
 ```
 
 Running in qemu:
 ```
-qemu-system-i386 -kernel kernel-001
+make run
 ```
