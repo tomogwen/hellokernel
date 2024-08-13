@@ -4,19 +4,17 @@ Extremely minimal kernel, following [this blog post](https://computers-art.mediu
 
 ## Notes
 
-- A kernel is the program that sits between hardware resources and applications. It is responsible for handling different processes, all hardware (via drivers).
-- It is loaded by a bootloader, which is loaded by the bios.
+- The [kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) is loaded by a [bootloader](https://en.wikipedia.org/wiki/Bootloader), which is loaded by the [bios](https://en.wikipedia.org/wiki/BIOS).
 
-How is it loaded?
-- Bios looks for bootable devices by checking the first 512 byte block (sector 0) of a device, which includes the Master Boot Record (MBR). If there is a magic number (0x55 and 0xAA) at the end of the sector, it is an MBR.
+How is the kernel loaded?
+- Bios looks for bootable devices by checking the first 512 byte block (sector 0) of a device. A magic number (0x55 and 0xAA) at the end of the sector indicates there is a Master Boot Record (MBR).
 - There should also be a partition table in the first sector, describing the partition layout.
-- The bios then looks for a partition marked as bootable in the MBR, and attempts to execute the first sector of the boot partition (starting from physical address 0x7c00) by copying it into RAM.
-- The bootloader then loads the kernel into physical address 0x100000 (on x86 machines).
-- All x86 processors begin in a 16-bit mode called real mode, but GRUB switches to 32-bit protected mode.
+- The bios then looks for a partition marked as bootable in the MBR, and attempts to execute the first sector of the boot partition (starting from physical address 0x7c00). This should be your bootloader, e.g., [GRUB](https://en.wikipedia.org/wiki/GNU_GRUB).
+- The bootloader then finds the kernel (via the multiboot header - see kernel.asm), loads the kernel into physical address 0x100000 (on x86 machines), and executes it.
+- All x86 processors begin in a 16-bit mode called real mode, but GRUB switches to 32-bit protected mode
 
-The bootloader:
-- The bootloader is written in assembly, to fire the main kernel function.
-- Additional comments in the file.
+Assembly:
+- The initial bit of the kernel is written in assembly, which calls the main C function.
 
 The kernel:
 - This kernel simply displays a string and halts.
