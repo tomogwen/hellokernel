@@ -2,6 +2,19 @@
 
 Extremely minimal kernel, following [this blog post](https://computers-art.medium.com/writing-a-basic-kernel-6479a495b713).
 
+## Building and Running
+
+Requires `make`, `nasm`, `gcc`, `ld`, `qemu-system-i386`.
+
+Building:
+```
+make
+```
+
+Running:
+```
+make run
+```
 ## Notes
 
 - The [kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) is loaded by a [bootloader](https://en.wikipedia.org/wiki/Bootloader), which is loaded by the [bios](https://en.wikipedia.org/wiki/BIOS).
@@ -29,12 +42,3 @@ Linking:
 - The layout of the executable is defined in SECTIONS, specifying 0x100000 as where the kernel code should start.
 - The '.' represents the location counter, and the following lines in the linker script represent sections defined in the assembly.
 
-Building:
-```
-make
-```
-
-Running in qemu:
-```
-make run
-```
