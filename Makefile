@@ -1,7 +1,7 @@
 # Define directories
 SRC_DIR = src
 OBJ_DIR = obj
-BIN_DIR = bin
+BIN_DIR = boot
 
 # Object files
 OBJ_FILES = $(OBJ_DIR)/kernasm.o $(OBJ_DIR)/kernc.o
